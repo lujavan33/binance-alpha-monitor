@@ -21,13 +21,22 @@ from pathlib import Path
 from typing import Optional
 
 import httpx
+from dotenv import load_dotenv
 
 # ============================================================
 # 配置
 # ============================================================
 
-BASE_DIR = Path(__file__).parent
-DB_PATH = str(BASE_DIR / "data" / "alpha.db")
+BASE_DIR = Path(__file__).resolve().parent
+
+load_dotenv(BASE_DIR / ".env", override=False)
+load_dotenv(BASE_DIR / ".env.systemd", override=False)
+
+db_path_raw = os.environ.get("DB_PATH", "data/alpha.db")
+db_path = Path(db_path_raw).expanduser()
+if not db_path.is_absolute():
+    db_path = BASE_DIR / db_path
+DB_PATH = str(db_path)
 
 # TG
 TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "")

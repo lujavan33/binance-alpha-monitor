@@ -70,8 +70,21 @@ pip install -r requirements.txt
 ### 2. 配置环境变量
 
 ```bash
+cp .env.example .env
+# 编辑 .env，填入你的 TG Bot Token 和 Chat ID
+```
+
+脚本启动时会自动读取仓库根目录下的 `.env` 和 `.env.systemd`。
+如果两边都配置了同一个变量，优先级是：
+
+1. 当前 shell / systemd 已注入的环境变量
+2. `.env`
+3. `.env.systemd`
+
+如果你用 systemd，也可以继续保留 `.env.systemd`：
+
+```bash
 cp .env.example .env.systemd
-# 编辑 .env.systemd，填入你的 TG Bot Token 和 Chat ID
 ```
 
 **必填：**
