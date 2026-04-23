@@ -1,0 +1,5 @@
+.env.systemd
+*.db
+__pycache__/
+*.pyc
+data/

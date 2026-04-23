@@ -1,0 +1,16 @@
+[Unit]
+Description=Binance Alpha Monitor
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/alpha-monitor
+EnvironmentFile=/home/ubuntu/alpha-monitor/.env.systemd
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/python3 alpha_monitor.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
